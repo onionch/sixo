@@ -12,9 +12,26 @@ public class User extends baseBean{
     private String mailAddr;
     private String phoneNum;
     private String userName;
-    private String userRole;
     private String userPassword;
+    private String roleDesc;
+    private int roleId;
     private int deleted =0;
+
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
 
     public String getRealName() {
         return realName;
@@ -72,14 +89,6 @@ public class User extends baseBean{
         this.userName = userName;
     }
 
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
     public String getUserPassword() {
         return userPassword;
     }
@@ -90,6 +99,6 @@ public class User extends baseBean{
 
     @Override
     public String toString() {
-        return "User [id=" + uId + ", name=" + userName + ", userRole=" + userRole + "]";
+        return "User [id=" + uId + ", name=" + userName + ", roleId=" + roleId + "]";
     }
 }

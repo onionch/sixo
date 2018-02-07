@@ -14,32 +14,33 @@
      -->
     <select id="listAll"
             resultType="com.onionch.webapp.website.bean.User">
-        SELECT * FROM user
+        SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id
+        WHERE deleted=0
     </select>
 
     <select id="selectByName" parameterType="string"
             resultType="com.onionch.webapp.website.bean.User">
         SELECT * FROM user
-        WHERE userName=#{userName}
+        WHERE userName=#{userName} AND deleted=0
         LIMIT 1
     </select>
 
     <insert id="create" parameterType="com.onionch.webapp.website.bean.User"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user
-        (uId,userName,userRole,userPassword,realName,mailAddr,phoneNum,deleted)
+        (uId,userName,roleId,userPassword,realName,mailAddr,phoneNum,created_date,updated_date,deleted)
         VALUES
-        (#{uId},#{userName},#{userRole},#{userPassword},#{realName},#{mailAddr},#{phoneNum},#{deleted})
+        (#{uId},#{userName},#{roleId},#{userPassword},#{realName},#{mailAddr},#{phoneNum},now(),now(),#{deleted})
     </insert>
 
     <update id="update" parameterType="com.onionch.webapp.website.bean.User">
-        UPDATE user set userRole=#{userRole},userName=#{userName},userPassword=#{userPassword}
+        UPDATE user set roleId=#{roleId},userName=#{userName},userPassword=#{userPassword},updated_date=now()
         WHERE uId=#{uId}
     </update>
 
-    <delete id="delete" parameterType="string">
-        DELETE from user
+    <update id="delete" parameterType="string">
+        UPDATE user set deleted=1,updated_date=now()
         WHERE uId=#{uId}
-    </delete>
+    </update>
 
 </mapper>

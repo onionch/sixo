@@ -51,6 +51,7 @@ public class TokenController {
                     String tokenContent = RandomStringUtils.randomAlphanumeric(32);
                     newToken.setToken(tokenContent);
                     newToken.setuId(user.getuId());
+                    newToken.setRoleId(user.getRoleId());
                     tokenService.create(newToken);
                     return RestResponse.response(200, "success", newToken.getToken());
                 } else {
