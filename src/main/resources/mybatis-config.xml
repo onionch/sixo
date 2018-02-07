@@ -9,5 +9,6 @@
         <mapper resource="mapping/privilegesMapper.xml"/>
         <mapper resource="mapping/resourceMapper.xml"/>
         <mapper resource="mapping/roleMapper.xml"/>
+        <mapper resource="mapping/menuMapper.xml"/>
     </mappers>
 </configuration>

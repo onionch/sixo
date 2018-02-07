@@ -5,9 +5,17 @@ import java.util.Date;
 public class Role extends baseBean{
 
     private int id;
+    private int access;
     private String roleName;
     private String roleDesc;
 
+    public int getAccess() {
+        return access;
+    }
+
+    public void setAccess(int access) {
+        this.access = access;
+    }
 
     public int getId() {
         return id;
