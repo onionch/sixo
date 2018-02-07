@@ -1,0 +1,8 @@
+#忽略gitignore文件
+.*
+!.gitignore
+#忽略target目录下的文件
+target/*
+webapp.iml
+webapp.log
+.idea/*

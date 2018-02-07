@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 为这个mapper指定一个唯一的namespace，namespace的值习惯上设置成包名+sql映射文件名，这样就能够保证namespace的值是唯一的
+例如namespace="me.gacl.mapping.userMapper"就是me.gacl.mapping(包名)+userMapper(userMapper.xml文件去除后缀)
+ -->
+<mapper namespace="com.onionch.webapp.website.mapper.TokenMapper">
+    <!-- 在select标签中编写查询的SQL语句， 设置select标签的id属性为getUser，id属性值必须是唯一的，不能够重复
+    使用parameterType属性指明查询时使用的参数类型，resultType属性指明查询返回的结果集类型
+    resultType="me.gacl.domain.User"就表示将查询结果封装成一个User类的对象返回
+    User类就是users表所对应的实体类
+    -->
+    <!--
+        根据id查询得到一个user对象
+     -->
+    <insert id="create" parameterType="com.onionch.webapp.website.bean.Token"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO token
+        (uId,roleId,token,created_date,updated_date,last_login_date)
+        VALUES
+        (#{uId},#{roleId},#{token},now(),now(),now())
+    </insert>
+
+    <select id="selectByUid" parameterType="string"
+            resultType="com.onionch.webapp.website.bean.Token">
+        SELECT * FROM token
+        WHERE uId=#{uId}
+        LIMIT 1
+    </select>
+
+    <select id="selectByToken" parameterType="string"
+            resultType="com.onionch.webapp.website.bean.Token">
+        SELECT * FROM token
+        WHERE token=#{token}
+        LIMIT 1
+    </select>
+
+    <update id="updateLastDate">
+        UPDATE token set last_login_date=now()
+        WHERE uId=#{uId}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        DELETE from token
+        WHERE uId=#{uId}
+    </delete>
+
+</mapper>
