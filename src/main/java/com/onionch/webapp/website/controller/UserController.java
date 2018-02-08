@@ -3,6 +3,7 @@ package com.onionch.webapp.website.controller;
 import com.onionch.webapp.website.bean.RestResponse;
 import com.onionch.webapp.website.bean.User;
 import com.onionch.webapp.website.service.UserService;
+import com.onionch.webapp.website.util.DESUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST)
     private @ResponseBody RestResponse create(@RequestBody User user){
         user.setuId(RandomStringUtils.randomNumeric(10));
+        String passwd=user.getUserPassword();
+        user.setUserPassword(DESUtil.encryptString(passwd));
         userService.create(user);
         return RestResponse.response(200,"success","");
     }

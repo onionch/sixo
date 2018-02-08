@@ -5,6 +5,7 @@ import com.onionch.webapp.website.service.RoleService;
 import com.onionch.webapp.website.service.TokenService;
 import com.onionch.webapp.website.service.UserService;
 import com.onionch.webapp.website.staticless.TokenStatic;
+import com.onionch.webapp.website.util.DESUtil;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class TokenController {
         if (null == user) {
             return RestResponse.response(500, "failed", "no such user");
         }
-        if (user.getUserPassword().equals(loginRequest.getPassword())) {
+        if (DESUtil.decryptString(user.getUserPassword()).equals(loginRequest.getPassword())) {
             //保存用户token
             Map map=new HashMap();
             Role role=roleService.findRoleById(user.getRoleId());
