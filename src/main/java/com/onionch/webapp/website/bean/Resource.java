@@ -1,8 +1,6 @@
 package com.onionch.webapp.website.bean;
 
-import java.util.Date;
-
-public class Resource extends baseBean{
+public class Resource extends BaseBean {
     private int id;
     private String resName;
     private String resDesc;

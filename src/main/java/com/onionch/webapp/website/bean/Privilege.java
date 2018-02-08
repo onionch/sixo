@@ -1,8 +1,6 @@
 package com.onionch.webapp.website.bean;
 
-import java.util.Date;
-
-public class Privilege extends baseBean{
+public class Privilege extends BaseBean {
 
     private int id;
     private int roleId;

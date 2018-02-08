@@ -3,7 +3,7 @@ package com.onionch.webapp.website.bean;
 /**
  * Created by onionch on 4/24/17.
  */
-public class User extends baseBean{
+public class User extends BaseBean {
     //实体类的属性和表的字段名称一一对应
     private int id;
 

@@ -2,7 +2,7 @@ package com.onionch.webapp.website.bean;
 
 import java.util.Date;
 
-public class Token extends baseBean{
+public class Token extends BaseBean {
 
     private int id;
     private String uId;

@@ -1,6 +1,6 @@
 package com.onionch.webapp.website.bean;
 
-public class Menu extends baseBean{
+public class Menu extends BaseBean {
 
     private int id;
     private String menuName;

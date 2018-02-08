@@ -1,6 +1,6 @@
 package com.onionch.webapp.website.bean;
 
-public class baseBean {
+public class BaseBean {
 
     private String created_date;
     private String updated_date;
