@@ -41,6 +41,12 @@ public class UserController {
         return RestResponse.response(200,"success","");
     }
 
+    @RequestMapping(value = "/{uId}",method = RequestMethod.GET)
+    private @ResponseBody RestResponse getById(@PathVariable String uId){
+        User user=userService.selectByUid(uId);
+        return RestResponse.response(200,"success",user);
+    }
+
     @RequestMapping(method = RequestMethod.PUT)
     private @ResponseBody RestResponse update(@RequestBody User user){
         userService.update(user);

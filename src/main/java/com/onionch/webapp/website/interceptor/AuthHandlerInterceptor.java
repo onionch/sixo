@@ -64,19 +64,19 @@ public class AuthHandlerInterceptor implements HandlerInterceptor {
 
         String token = request.getHeader("Token");
         if (StringUtils.isEmpty(token)) {
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709TOKEN", "no token")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "no token")));
             return false;
         }
 
         Token hasToken = tokenService.selectByToken(token);
         if (null == hasToken) {
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709TOKEN", "error token")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "error token")));
             return false;
         }
 
         Role hasRole=roleService.findRoleById(hasToken.getRoleId());
         if(null == hasRole){
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709\\u8d44\\u6e90", "no role")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "no role")));
             return false;
         }
 
@@ -86,19 +86,19 @@ public class AuthHandlerInterceptor implements HandlerInterceptor {
 
         Resource hasResource = resourceService.findByName(resource);
         if (null == hasResource) {
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709\\u8d44\\u6e90", "no resource")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "no resource")));
             return false;
         }
 
         Privilege privilege = privilegeService.findByRoleId(hasToken.getRoleId(), hasResource.getId());
         if (null == privilege) {
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709\\u64cd\\u4f5c\\u6743\\u9650", "no privilege")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "no privilege")));
             return false;
         }
 
         String method = request.getMethod();
         if (privilege.getOperator().indexOf(method.toLowerCase()) == -1) {
-            response.getWriter().print(JSONObject.fromObject(RestResponse.response(500, "\\u6ca1\\u6709\\"+method+"\\u6743\\u9650", "no method")));
+            response.getWriter().print(JSONObject.fromObject(RestResponse.response(403, "没有访问权限", "no method")));
             return false;
         }
         return true;

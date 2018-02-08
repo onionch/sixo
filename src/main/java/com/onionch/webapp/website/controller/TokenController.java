@@ -63,11 +63,13 @@ public class TokenController {
                     map.put("token",newToken.getToken());
                     map.put("access",role.getAccess());
                     map.put("roleName",role.getRoleName());
+                    map.put("uid",user.getuId());
                     return RestResponse.response(200, "success", map);
                 } else {
                     map.put("token",token.getToken());
                     map.put("access",role.getAccess());
                     map.put("roleName",role.getRoleName());
+                    map.put("uid",user.getuId());
                     return RestResponse.response(200, "success", map);
                 }
             } catch (Exception e) {

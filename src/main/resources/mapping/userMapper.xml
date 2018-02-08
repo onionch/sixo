@@ -25,6 +25,14 @@
         LIMIT 1
     </select>
 
+    <select id="selectByUid" parameterType="string"
+            resultType="com.onionch.webapp.website.bean.User">
+        SELECT * FROM user
+        WHERE uId=#{uId} AND deleted=0
+        LIMIT 1
+    </select>
+
+
     <insert id="create" parameterType="com.onionch.webapp.website.bean.User"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user
