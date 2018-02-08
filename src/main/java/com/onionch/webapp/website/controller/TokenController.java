@@ -1,9 +1,7 @@
 package com.onionch.webapp.website.controller;
 
-import com.onionch.webapp.website.bean.LoginRequest;
-import com.onionch.webapp.website.bean.RestResponse;
-import com.onionch.webapp.website.bean.Token;
-import com.onionch.webapp.website.bean.User;
+import com.onionch.webapp.website.bean.*;
+import com.onionch.webapp.website.service.RoleService;
 import com.onionch.webapp.website.service.TokenService;
 import com.onionch.webapp.website.service.UserService;
 import com.onionch.webapp.website.staticless.TokenStatic;
@@ -13,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/token")
@@ -25,6 +26,9 @@ public class TokenController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping(value = "/{uId}", method = RequestMethod.GET)
     private @ResponseBody
@@ -44,6 +48,8 @@ public class TokenController {
         }
         if (user.getUserPassword().equals(loginRequest.getPassword())) {
             //保存用户token
+            Map map=new HashMap();
+            Role role=roleService.findRoleById(user.getRoleId());
             try {
                 Token token = tokenService.selectByUid(user.getuId());
                 if (null == token) {
@@ -53,9 +59,15 @@ public class TokenController {
                     newToken.setuId(user.getuId());
                     newToken.setRoleId(user.getRoleId());
                     tokenService.create(newToken);
-                    return RestResponse.response(200, "success", newToken.getToken());
+                    map.put("token",newToken.getToken());
+                    map.put("access",role.getAccess());
+                    map.put("roleName",role.getRoleName());
+                    return RestResponse.response(200, "success", map);
                 } else {
-                    return RestResponse.response(200, "success", token.getToken());
+                    map.put("token",token.getToken());
+                    map.put("access",role.getAccess());
+                    map.put("roleName",role.getRoleName());
+                    return RestResponse.response(200, "success", map);
                 }
             } catch (Exception e) {
                 logger.error(e.getMessage());
