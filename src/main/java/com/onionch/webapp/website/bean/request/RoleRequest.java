@@ -1,9 +1,7 @@
-package com.onionch.webapp.website.bean;
+package com.onionch.webapp.website.bean.request;
 
-public class Role extends BaseBean {
+public class RoleRequest {
 
-
-    private String serialNum;
     private int access;
     private String roleName;
     private String roleDesc;
@@ -14,14 +12,6 @@ public class Role extends BaseBean {
 
     public void setAccess(int access) {
         this.access = access;
-    }
-
-    public String getSerialNum() {
-        return serialNum;
-    }
-
-    public void setSerialNum(String serialNum) {
-        this.serialNum = serialNum;
     }
 
     public String getRoleName() {
@@ -39,5 +29,4 @@ public class Role extends BaseBean {
     public void setRoleDesc(String roleDesc) {
         this.roleDesc = roleDesc;
     }
-
 }

@@ -1,36 +1,89 @@
 package com.onionch.webapp.website.service.impl;
 
+import com.mysql.jdbc.StringUtils;
 import com.onionch.webapp.website.bean.Menu;
+import com.onionch.webapp.website.bean.response.RestResponse;
+import com.onionch.webapp.website.bean.enums.ResultCode;
+import com.onionch.webapp.website.bean.request.MenuRequest;
 import com.onionch.webapp.website.mapper.MenuMapper;
 import com.onionch.webapp.website.service.MenuService;
+import com.onionch.webapp.website.util.EncryptUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Date;
 
 @Service("menuServiceImpl")
-public class MenuServiceImpl implements MenuService{
+public class MenuServiceImpl implements MenuService {
+
+    private static final Logger logger = Logger.getLogger(MenuServiceImpl.class);
 
     @Autowired
     private MenuMapper menuMapper;
 
     @Override
-    public void create(Menu menu) {
-        menuMapper.create(menu);
+    public RestResponse create(MenuRequest menuRequest) {
+        try {
+            Menu menu = new Menu();
+            menu.setMenuName(menuRequest.getName());
+            menu.setAccess(menuRequest.getAccess());
+            menu.setUrl(menuRequest.getUrl());
+            menu.setSerialNum(EncryptUtil.generate32(menu.getMenuName() + new Date().getTime()));
+            menuMapper.create(menu);
+            return RestResponse.success(null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
     }
 
     @Override
-    public void update(Menu menu) {
-        menuMapper.update(menu);
+    public RestResponse update(String menuId, MenuRequest menuRequest) {
+        try {
+            Menu menu = menuMapper.findBySerialNumber(menuId);
+            if(menu == null){
+                return RestResponse.failure(ResultCode.MENU_NOT_EXIST);
+            }
+            if(!StringUtils.isNullOrEmpty(menuRequest.getName())){
+                menu.setMenuName(menuRequest.getName());
+            }
+            if(!StringUtils.isNullOrEmpty(menuRequest.getAccess()+"")){
+                menu.setAccess(menuRequest.getAccess());
+            }
+            if(!StringUtils.isNullOrEmpty(menuRequest.getUrl())){
+                menu.setUrl(menuRequest.getUrl());
+            }
+            menuMapper.update(menu);
+            return RestResponse.success(null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
     }
 
     @Override
-    public void delete(String id) {
-        menuMapper.delete(id);
+    public RestResponse delete(String id) {
+        try {
+            Menu menu = menuMapper.findBySerialNumber(id);
+            if(menu == null){
+                return RestResponse.failure(ResultCode.MENU_NOT_EXIST);
+            }
+            menuMapper.delete(id);
+            return RestResponse.success(null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
     }
 
     @Override
-    public List<Menu> listAll() {
-        return menuMapper.listAll();
+    public RestResponse listMenu() {
+        try {
+            return RestResponse.success(menuMapper.listAll());
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
     }
 }

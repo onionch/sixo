@@ -1,10 +1,9 @@
 package com.onionch.webapp.website.controller;
 
-import com.onionch.webapp.website.bean.RestResponse;
+import com.onionch.webapp.website.bean.request.RoleRequest;
+import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.bean.Role;
-import com.onionch.webapp.website.bean.User;
 import com.onionch.webapp.website.service.RoleService;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/role")
+@RequestMapping("/api/v1/*")
 public class RoleController {
 
     private static final Logger logger = Logger.getLogger(RoleController.class);
@@ -20,29 +19,30 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/role", method = RequestMethod.GET)
     private @ResponseBody
-    RestResponse listAllRoles(){
-        List list=roleService.listAll();
-        return RestResponse.response(200,"success",list);
+    RestResponse listRoles() {
+        return roleService.listAll();
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    private @ResponseBody RestResponse create(@RequestBody Role role){
-        roleService.create(role);
-        return RestResponse.response(200,"success","");
+    @RequestMapping(value = "/role",method = RequestMethod.POST)
+    private @ResponseBody
+    RestResponse create(@RequestBody RoleRequest roleRequest) {
+        return roleService.create(roleRequest);
     }
 
-    @RequestMapping(value = "/{uId}",method = RequestMethod.DELETE)
-    private @ResponseBody RestResponse delete(@PathVariable String uId){
+    @RequestMapping(value = "/role/{uId}", method = RequestMethod.DELETE)
+    private @ResponseBody
+    RestResponse delete(@PathVariable String uId) {
         roleService.delete(uId);
-        return RestResponse.response(200,"success","");
+        return RestResponse.response(200, "success", "");
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    private @ResponseBody RestResponse update(@RequestBody Role role){
-        roleService.update(role);
-        return RestResponse.response(200,"success","");
+    @RequestMapping(value = "/role/{uId}", method = RequestMethod.PUT)
+    private @ResponseBody
+    RestResponse update(@PathVariable String uId,@RequestBody RoleRequest roleRequest) {
+//        roleService.update(role);
+        return RestResponse.response(200, "success", "");
     }
 
 }

@@ -1,4 +1,4 @@
-package com.onionch.webapp.website.bean;
+package com.onionch.webapp.website.bean.request;
 
 public class LoginRequest {
     private String username;

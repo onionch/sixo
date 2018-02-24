@@ -1,6 +1,6 @@
 package com.onionch.webapp.website.controller;
 
-import com.onionch.webapp.website.bean.RestResponse;
+import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.bean.User;
 import com.onionch.webapp.website.service.UserService;
 import com.onionch.webapp.website.util.DESUtil;
@@ -47,8 +47,8 @@ public class UserController {
         return RestResponse.response(200,"success",user);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
-    private @ResponseBody RestResponse update(@RequestBody User user){
+    @RequestMapping(value = "/{uId}",method = RequestMethod.PUT)
+    private @ResponseBody RestResponse update(@PathVariable String uId,@RequestBody User user){
         userService.update(user);
         return RestResponse.response(200,"success","");
     }

@@ -2,7 +2,7 @@ package com.onionch.webapp.website.controller;
 
 
 import com.onionch.webapp.website.bean.Privilege;
-import com.onionch.webapp.website.bean.RestResponse;
+import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.service.PrivilegeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

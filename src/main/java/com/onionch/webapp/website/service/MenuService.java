@@ -1,12 +1,11 @@
 package com.onionch.webapp.website.service;
 
-import com.onionch.webapp.website.bean.Menu;
-
-import java.util.List;
+import com.onionch.webapp.website.bean.response.RestResponse;
+import com.onionch.webapp.website.bean.request.MenuRequest;
 
 public interface MenuService {
-    void create(Menu menu);
-    void update(Menu menu);
-    void delete(String id);
-    List<Menu> listAll();
+    RestResponse create(MenuRequest menu);
+    RestResponse update(String menuId,MenuRequest menu);
+    RestResponse delete(String menuId);
+    RestResponse listMenu();
 }

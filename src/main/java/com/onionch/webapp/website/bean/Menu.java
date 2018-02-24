@@ -2,10 +2,18 @@ package com.onionch.webapp.website.bean;
 
 public class Menu extends BaseBean {
 
-    private int id;
     private String menuName;
     private String url;
+    private String serialNum;
     private int access;
+
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSerialNum(String serialNum) {
+        this.serialNum = serialNum;
+    }
 
     public String getMenuName() {
         return menuName;
@@ -13,14 +21,6 @@ public class Menu extends BaseBean {
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUrl() {
