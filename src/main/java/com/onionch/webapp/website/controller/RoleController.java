@@ -27,7 +27,7 @@ public class RoleController {
         return roleService.listAll();
     }
 
-    @RequestMapping(value = "/role",method = RequestMethod.POST)
+    @RequestMapping(value = "/role", method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody RoleRequest roleRequest) {
         if (StringUtils.isEmpty(roleRequest.getRoleName())) {
@@ -50,11 +50,11 @@ public class RoleController {
 
     @RequestMapping(value = "/role/{roleId}", method = RequestMethod.PUT)
     private @ResponseBody
-    RestResponse update(@PathVariable String roleId,@RequestBody RoleRequest roleRequest) {
+    RestResponse update(@PathVariable String roleId, @RequestBody RoleRequest roleRequest) {
         if (StringUtils.isEmpty(roleId)) {
             return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "role Id access is empty");
         }
-        return roleService.update(roleId,roleRequest);
+        return roleService.update(roleId, roleRequest);
     }
 
 }
