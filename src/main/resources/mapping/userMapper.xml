@@ -12,6 +12,26 @@
     <!--
         根据id查询得到一个user对象
      -->
+    <select id="all" resultType="com.onionch.webapp.website.bean.User">
+        SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id
+        WHERE deleted=0 and 1=1
+        <if test="userName != null">
+            <if test="userName != '' ">
+                and userName like CONCAT('%',#{userName},'%')
+            </if>
+        </if>
+        order by created_date desc limit #{pageIndex},#{pageSize};
+    </select>
+
+    <select id="allCount" resultType="Integer">
+        select count(1) from user where 1=1
+        <if test="userName != null">
+            <if test="userName != '' ">
+                and userName like CONCAT('%',#{userName},'%')
+            </if>
+        </if>;
+    </select>
+
     <select id="listAll"
             resultType="com.onionch.webapp.website.bean.User">
         SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id

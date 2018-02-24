@@ -6,8 +6,8 @@ import com.onionch.webapp.website.bean.enums.ResultCode;
 import com.onionch.webapp.website.bean.request.LoginRequest;
 import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.mapper.TokenMapper;
+import com.onionch.webapp.website.mapper.UserMapper;
 import com.onionch.webapp.website.service.TokenService;
-import com.onionch.webapp.website.service.UserService;
 import com.onionch.webapp.website.util.DESUtil;
 import com.onionch.webapp.website.util.PrePageUtil;
 import org.apache.commons.lang.RandomStringUtils;
@@ -28,13 +28,13 @@ public class TokenServiceImpl implements TokenService {
     private TokenMapper tokenMapper;
 
     @Autowired
-    private UserService userService;
+    private UserMapper userMapper;
 
 
     @Override
     public RestResponse create(LoginRequest loginRequest) {
         try {
-            User user = userService.selectByName(loginRequest.getUsername());
+            User user = userMapper.selectByName(loginRequest.getUsername());
             if (null == user) {
                 return RestResponse.failure(ResultCode.USER_NOT_EXIST);
             }

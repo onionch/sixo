@@ -1,25 +1,15 @@
-package com.onionch.webapp.website.bean;
+package com.onionch.webapp.website.bean.request;
 
-/**
- * Created by onionch on 4/24/17.
- */
-public class User extends BaseBean {
-    private String uId;
+public class UserRequest {
+
     private String realName;
     private String mailAddr;
     private String phoneNum;
     private String userName;
     private String userPassword;
+    private String roleDesc;
     private int roleId;
     private int deleted =0;
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
 
     public String getRealName() {
         return realName;
@@ -45,22 +35,6 @@ public class User extends BaseBean {
         this.phoneNum = phoneNum;
     }
 
-    public int getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
-    }
-
-    public String getuId() {
-        return uId;
-    }
-
-    public void setuId(String uId) {
-        this.uId = uId;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -77,8 +51,27 @@ public class User extends BaseBean {
         this.userPassword = userPassword;
     }
 
-    @Override
-    public String toString() {
-        return "User [id=" + uId + ", name=" + userName + ", roleId=" + roleId + "]";
+    public String getRoleDesc() {
+        return roleDesc;
+    }
+
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }
