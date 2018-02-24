@@ -18,8 +18,12 @@ public enum ResultCode {
     MENU_NOT_EXIST(20001,"菜单不存在"),
 
     /* 角色错误：30001-39999　*/
-    ROLE_NOT_EXIST(30001,"角色不存在");
+    ROLE_NOT_EXIST(30001,"角色不存在"),
 
+    /* TOKEN错误：40001-49999　*/
+    TOKEN_NOT_EXIST(40001,"TOKEN不存在"),
+    USER_NOT_EXIST(40001,"USER不存在"),
+    PASSWORD_ERROR(40002,"密码校验失败");
 
     private Integer code;
 

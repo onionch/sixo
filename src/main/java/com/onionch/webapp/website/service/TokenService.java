@@ -1,11 +1,9 @@
 package com.onionch.webapp.website.service;
-
-import com.onionch.webapp.website.bean.Token;
+import com.onionch.webapp.website.bean.request.LoginRequest;
+import com.onionch.webapp.website.bean.response.RestResponse;
 
 public interface TokenService {
-    void create(Token token);
-    void updateLastDate();
-    void delete(String uId);
-    Token selectByUid(String uId);
-    Token selectByToken(String token);
+    RestResponse create(LoginRequest loginRequest);
+    RestResponse listTokens(String uId,Integer pageIndex,Integer pageSize);
+    RestResponse delete(String uId);
 }

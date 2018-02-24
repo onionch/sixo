@@ -21,13 +21,13 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/role", method = RequestMethod.GET)
+    @RequestMapping(value = "/roles", method = RequestMethod.GET)
     private @ResponseBody
     RestResponse listRoles() {
         return roleService.listAll();
     }
 
-    @RequestMapping(value = "/role", method = RequestMethod.POST)
+    @RequestMapping(value = "/roles", method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody RoleRequest roleRequest) {
         if (StringUtils.isEmpty(roleRequest.getRoleName())) {
@@ -39,7 +39,7 @@ public class RoleController {
         return roleService.create(roleRequest);
     }
 
-    @RequestMapping(value = "/role/{roleId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/roles/{roleId}", method = RequestMethod.DELETE)
     private @ResponseBody
     RestResponse delete(@PathVariable String roleId) {
         if (StringUtils.isEmpty(roleId)) {
@@ -48,7 +48,7 @@ public class RoleController {
         return roleService.delete(roleId);
     }
 
-    @RequestMapping(value = "/role/{roleId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/roles/{roleId}", method = RequestMethod.PUT)
     private @ResponseBody
     RestResponse update(@PathVariable String roleId, @RequestBody RoleRequest roleRequest) {
         if (StringUtils.isEmpty(roleId)) {

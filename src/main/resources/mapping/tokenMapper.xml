@@ -12,6 +12,25 @@
     <!--
         根据id查询得到一个user对象
      -->
+    <select id="all" resultType="com.onionch.webapp.website.bean.Token">
+        select * from token WHERE 1=1
+        <if test="uId != null">
+            <if test="uId != '' ">
+                and uId like CONCAT('%',#{uId},'%')
+            </if>
+        </if>
+        order by last_login_date desc limit #{pageIndex},#{pageSize};
+    </select>
+
+    <select id="allCount" resultType="Integer">
+        select count(1) from token where 1=1
+        <if test="uId != null">
+            <if test="uId != '' ">
+                and uId like CONCAT('%',#{uId},'%')
+            </if>
+        </if>;
+    </select>
+
     <insert id="create" parameterType="com.onionch.webapp.website.bean.Token"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO token
@@ -36,12 +55,12 @@
 
     <update id="updateLastDate">
         UPDATE token set last_login_date=now()
-        WHERE uId=#{uId}
+        WHERE token=#{token}
     </update>
 
     <delete id="delete" parameterType="string">
         DELETE from token
-        WHERE uId=#{uId}
+        WHERE token=#{token}
     </delete>
 
 </mapper>

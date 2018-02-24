@@ -17,13 +17,13 @@ public class MenuController {
     @Autowired
     private MenuService menuService;
 
-    @RequestMapping(value = "/menu", method = RequestMethod.GET)
+    @RequestMapping(value = "/menus", method = RequestMethod.GET)
     private @ResponseBody
     RestResponse listMenus() {
         return menuService.listMenu();
     }
 
-    @RequestMapping(value = "/menu", method = RequestMethod.POST)
+    @RequestMapping(value = "/menus", method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody MenuRequest menuRequest) {
         if (StringUtils.isEmpty(menuRequest.getName())) {
@@ -38,7 +38,7 @@ public class MenuController {
         return menuService.create(menuRequest);
     }
 
-    @RequestMapping(value = "/menu/{menuId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/menus/{menuId}", method = RequestMethod.DELETE)
     private @ResponseBody
     RestResponse delete(@PathVariable("menuId") String menuId) {
         if (StringUtils.isEmpty(menuId)) {
@@ -47,7 +47,7 @@ public class MenuController {
         return menuService.delete(menuId);
     }
 
-    @RequestMapping(value = "/menu/{menuId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/menus/{menuId}", method = RequestMethod.PUT)
     private @ResponseBody
     RestResponse update(@PathVariable("menuId") String menuId, @RequestBody MenuRequest menuRequest) {
         if (StringUtils.isEmpty(menuId)) {
