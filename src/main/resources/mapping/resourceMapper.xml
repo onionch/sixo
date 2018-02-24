@@ -12,6 +12,25 @@
     <!--
         根据id查询得到一个user对象
      -->
+    <select id="all" resultType="com.onionch.webapp.website.bean.Resource">
+        SELECT * FROM resource WHERE 1=1
+        <if test="resName != null">
+            <if test="resName != '' ">
+                and resName like CONCAT('%',#{resName},'%')
+            </if>
+        </if>
+        order by created_date desc limit #{pageIndex},#{pageSize};
+    </select>
+
+    <select id="allCount" resultType="Integer">
+        select count(1) from resource where 1=1
+        <if test="resName != null">
+            <if test="resName != '' ">
+                and resName like CONCAT('%',#{resName},'%')
+            </if>
+        </if>;
+    </select>
+
     <select id="listAll" resultType="com.onionch.webapp.website.bean.Resource">
         SELECT * FROM resource
     </select>
@@ -21,22 +40,26 @@
         SELECT * FROM resource WHERE resName=#{resName}
     </select>
 
-    <insert id="create" parameterType="com.onionch.webapp.website.bean.Resource"
-            useGeneratedKeys="true" keyProperty="id">
+    <select id="findBySerialNum"
+            resultType="com.onionch.webapp.website.bean.Resource">
+        SELECT * FROM resource WHERE serialNum=#{serialNum}
+    </select>
+
+    <insert id="create" parameterType="com.onionch.webapp.website.bean.Resource">
         INSERT INTO resource
-        (resName,resDesc,created_date,updated_date)
+        (serialNum,resName,resDesc,created_date,updated_date)
         VALUES
-        (#{resName},#{resDesc},now(),now())
+        (#{serialNum},#{resName},#{resDesc},now(),now())
     </insert>
 
     <update id="update" parameterType="com.onionch.webapp.website.bean.Resource">
         UPDATE resource set resName=#{resName},resDesc=#{resDesc},updated_date=now()
-        WHERE id=#{id}
+        WHERE serialNum=#{serialNum}
     </update>
 
     <delete id="delete" parameterType="string">
         DELETE from resource
-        WHERE id=#{id}
+        WHERE serialNum=#{serialNum}
     </delete>
 
 </mapper>

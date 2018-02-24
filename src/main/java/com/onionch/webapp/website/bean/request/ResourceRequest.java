@@ -1,17 +1,8 @@
-package com.onionch.webapp.website.bean;
+package com.onionch.webapp.website.bean.request;
 
-public class Resource extends BaseBean {
-    private String serialNum;
+public class ResourceRequest {
     private String resName;
     private String resDesc;
-
-    public String getSerialNum() {
-        return serialNum;
-    }
-
-    public void setSerialNum(String serialNum) {
-        this.serialNum = serialNum;
-    }
 
     public String getResName() {
         return resName;
@@ -29,3 +20,4 @@ public class Resource extends BaseBean {
         this.resDesc = resDesc;
     }
 }
+

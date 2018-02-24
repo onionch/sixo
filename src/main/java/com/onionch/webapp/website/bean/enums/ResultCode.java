@@ -23,7 +23,12 @@ public enum ResultCode {
     /* TOKEN错误：40001-49999　*/
     TOKEN_NOT_EXIST(40001,"TOKEN不存在"),
     USER_NOT_EXIST(40001,"USER不存在"),
-    PASSWORD_ERROR(40002,"密码校验失败");
+    PASSWORD_ERROR(40002,"密码校验失败"),
+
+    /* 资源错误：50001-59999　*/
+    RES_ALREADY_EXIST(50001,"资源已存在"),
+    RES_NOT_EXIST(50002,"资源不存在"),
+    ;
 
     private Integer code;
 
