@@ -15,7 +15,10 @@ public enum ResultCode {
     PARAM_NOT_COMPLETE(10004, "参数缺失"),
 
     /* 菜单错误：20001-29999　*/
-    MENU_NOT_EXIST(20001,"菜单不存在");
+    MENU_NOT_EXIST(20001,"菜单不存在"),
+
+    /* 角色错误：30001-39999　*/
+    ROLE_NOT_EXIST(30001,"角色不存在");
 
 
     private Integer code;

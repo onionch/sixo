@@ -10,9 +10,8 @@ import com.onionch.webapp.website.util.EncryptUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.util.StringUtils;
 import java.util.Date;
-import java.util.List;
 
 @Service("roleServiceImpl")
 public class RoleServiceImpl implements RoleService {
@@ -40,14 +39,36 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RestResponse update(String roleId,RoleRequest roleRequest) {
-
-       return null;
+        try {
+            Role role=roleMapper.findBySerialNumber(roleId);
+            if(null == role){
+                return RestResponse.failure(ResultCode.ROLE_NOT_EXIST);
+            }
+            if(!StringUtils.isEmpty(roleRequest.getAccess())){
+                role.setAccess(roleRequest.getAccess());
+            }
+            if(!StringUtils.isEmpty(roleRequest.getRoleDesc())){
+                role.setRoleDesc(roleRequest.getRoleDesc());
+            }
+            if(!StringUtils.isEmpty(roleRequest.getRoleName())){
+                role.setRoleName(roleRequest.getRoleName());
+            }
+            roleMapper.update(role);
+            return RestResponse.success(null);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
     }
 
     @Override
-    public RestResponse delete(String rId) {
+    public RestResponse delete(String roleId) {
         try {
-            roleMapper.delete(rId);
+            Role role=roleMapper.findBySerialNumber(roleId);
+            if(null == role){
+                return RestResponse.failure(ResultCode.ROLE_NOT_EXIST);
+            }
+            roleMapper.delete(roleId);
             return RestResponse.success(null);
         } catch (Exception e) {
             logger.error(e.getMessage());

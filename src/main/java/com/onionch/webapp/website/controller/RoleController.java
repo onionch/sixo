@@ -1,11 +1,13 @@
 package com.onionch.webapp.website.controller;
 
+import com.onionch.webapp.website.bean.enums.ResultCode;
 import com.onionch.webapp.website.bean.request.RoleRequest;
 import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.bean.Role;
 import com.onionch.webapp.website.service.RoleService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,21 +30,31 @@ public class RoleController {
     @RequestMapping(value = "/role",method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody RoleRequest roleRequest) {
+        if (StringUtils.isEmpty(roleRequest.getRoleName())) {
+            return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "role name is empty");
+        }
+        if (StringUtils.isEmpty(roleRequest.getRoleDesc())) {
+            return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "role desc is empty");
+        }
         return roleService.create(roleRequest);
     }
 
-    @RequestMapping(value = "/role/{uId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/role/{roleId}", method = RequestMethod.DELETE)
     private @ResponseBody
-    RestResponse delete(@PathVariable String uId) {
-        roleService.delete(uId);
-        return RestResponse.response(200, "success", "");
+    RestResponse delete(@PathVariable String roleId) {
+        if (StringUtils.isEmpty(roleId)) {
+            return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "role Id access is empty");
+        }
+        return roleService.delete(roleId);
     }
 
-    @RequestMapping(value = "/role/{uId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/role/{roleId}", method = RequestMethod.PUT)
     private @ResponseBody
-    RestResponse update(@PathVariable String uId,@RequestBody RoleRequest roleRequest) {
-//        roleService.update(role);
-        return RestResponse.response(200, "success", "");
+    RestResponse update(@PathVariable String roleId,@RequestBody RoleRequest roleRequest) {
+        if (StringUtils.isEmpty(roleId)) {
+            return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "role Id access is empty");
+        }
+        return roleService.update(roleId,roleRequest);
     }
 
 }
