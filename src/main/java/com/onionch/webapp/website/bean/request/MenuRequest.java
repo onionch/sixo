@@ -3,6 +3,7 @@ package com.onionch.webapp.website.bean.request;
 public class MenuRequest {
     private String menuName;
     private String url;
+    private String alias;
     private int access;
 
     public String getMenuName() {
@@ -27,5 +28,13 @@ public class MenuRequest {
 
     public void setAccess(int access) {
         this.access = access;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 }

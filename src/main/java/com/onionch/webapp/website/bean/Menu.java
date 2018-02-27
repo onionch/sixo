@@ -5,6 +5,7 @@ public class Menu extends BaseBean {
     private String menuName;
     private String url;
     private String serialNum;
+    private String alias;
     private int access;
 
     public String getSerialNum() {
@@ -37,5 +38,13 @@ public class Menu extends BaseBean {
 
     public void setAccess(int access) {
         this.access = access;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
 }
