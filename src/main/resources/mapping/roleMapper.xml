@@ -34,6 +34,26 @@
         SELECT * FROM role
     </select>
 
+    <select id="all" resultType="com.onionch.webapp.website.bean.Role">
+        SELECT * FROM role
+        WHERE 1=1
+        <if test="roleName != null">
+            <if test="roleName != '' ">
+                and roleName like CONCAT('%',#{roleName},'%')
+            </if>
+        </if>
+        order by created_date desc limit #{pageIndex},#{pageSize};
+    </select>
+
+    <select id="allCount" resultType="Integer">
+        select count(1) from role where 1=1
+        <if test="roleName != null">
+            <if test="roleName != '' ">
+                and roleName like CONCAT('%',#{roleName},'%')
+            </if>
+        </if>;
+    </select>
+
     <select id="findRoleById" parameterType="int"
             resultType="com.onionch.webapp.website.bean.Role">
         SELECT * FROM role WHERE id=#{id}

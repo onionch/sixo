@@ -23,8 +23,10 @@ public class RoleController {
 
     @RequestMapping(value = "/roles", method = RequestMethod.GET)
     private @ResponseBody
-    RestResponse listRoles() {
-        return roleService.listAll();
+    RestResponse listRoles(@RequestParam(value = "roleName", required = false) String roleName,
+                           @RequestParam(value = "pageIndex", required = false, defaultValue = "1") Integer pageIndex,
+                           @RequestParam(value = "pageSize", required = false, defaultValue = "50") Integer pageSize) {
+        return roleService.listAll(roleName,pageIndex,pageSize);
     }
 
     @RequestMapping(value = "/roles", method = RequestMethod.POST)

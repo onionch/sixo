@@ -38,4 +38,9 @@
         select * from menu where serialNum=#{serialNum};
     </select>
 
+    <select id="listMenuByUserName" resultType="com.onionch.webapp.website.bean.Menu">
+        SELECT m.url FROM user u LEFT JOIN role r ON u.roleId=r.id RIGHT JOIN menu m ON r.access=m.access
+        WHERE u.userName=#{userName};
+    </select>
+
 </mapper>

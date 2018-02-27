@@ -26,7 +26,7 @@ public class MenuController {
     @RequestMapping(value = "/menus", method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody MenuRequest menuRequest) {
-        if (StringUtils.isEmpty(menuRequest.getName())) {
+        if (StringUtils.isEmpty(menuRequest.getMenuName())) {
             return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "menu name is empty");
         }
         if (StringUtils.isEmpty(menuRequest.getUrl())) {

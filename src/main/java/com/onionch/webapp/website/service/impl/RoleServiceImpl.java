@@ -7,11 +7,14 @@ import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.mapper.RoleMapper;
 import com.onionch.webapp.website.service.RoleService;
 import com.onionch.webapp.website.util.EncryptUtil;
+import com.onionch.webapp.website.util.PrePageUtil;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service("roleServiceImpl")
 public class RoleServiceImpl implements RoleService {
@@ -77,17 +80,20 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public RestResponse listAll() {
+    public RestResponse listAll(String roleName,Integer pageIndex,Integer pageSize) {
         try {
-            return RestResponse.success(roleMapper.listAll());
+            Integer totalCount = roleMapper.allCount(roleName);
+            Integer prePageIndex = ((pageIndex - 1) * pageSize);
+            Map map = new HashMap();
+            map.put("list", roleMapper.all(roleName, prePageIndex, pageSize));
+            map.put("totalCount", totalCount);
+            map.put("totalPage", PrePageUtil.pageCount(pageSize, totalCount));
+            map.put("currentPage", pageIndex);
+            map.put("viewTotal", pageSize);
+            return RestResponse.success(map);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("ROLE SERVICE ALL ERROR:" + e.getMessage());
             return RestResponse.failure(ResultCode.SYSTEM_ERROR);
         }
-    }
-
-    @Override
-    public Role findRoleById(int id) {
-        return roleMapper.findRoleById(id);
     }
 }

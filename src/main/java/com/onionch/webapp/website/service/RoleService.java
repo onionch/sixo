@@ -10,6 +10,5 @@ public interface RoleService {
     RestResponse create(RoleRequest role);
     RestResponse update(String roleId,RoleRequest role);
     RestResponse delete(String rId);
-    RestResponse listAll();
-    Role findRoleById(int id);
+    RestResponse listAll(String roleName,Integer pageIndex,Integer pageSize);
 }

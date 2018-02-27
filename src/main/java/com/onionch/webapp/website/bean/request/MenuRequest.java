@@ -1,16 +1,16 @@
 package com.onionch.webapp.website.bean.request;
 
 public class MenuRequest {
-    private String name;
+    private String menuName;
     private String url;
     private int access;
 
-    public String getName() {
-        return name;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
     public String getUrl() {

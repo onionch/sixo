@@ -2,6 +2,7 @@ package com.onionch.webapp.website.service.impl;
 
 import com.mysql.jdbc.StringUtils;
 import com.onionch.webapp.website.bean.Menu;
+import com.onionch.webapp.website.bean.request.MenuListRequest;
 import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.bean.enums.ResultCode;
 import com.onionch.webapp.website.bean.request.MenuRequest;
@@ -26,7 +27,7 @@ public class MenuServiceImpl implements MenuService {
     public RestResponse create(MenuRequest menuRequest) {
         try {
             Menu menu = new Menu();
-            menu.setMenuName(menuRequest.getName());
+            menu.setMenuName(menuRequest.getMenuName());
             menu.setAccess(menuRequest.getAccess());
             menu.setUrl(menuRequest.getUrl());
             menu.setSerialNum(EncryptUtil.generate32(menu.getMenuName() + new Date().getTime()));
@@ -45,8 +46,8 @@ public class MenuServiceImpl implements MenuService {
             if(menu == null){
                 return RestResponse.failure(ResultCode.MENU_NOT_EXIST);
             }
-            if(!StringUtils.isNullOrEmpty(menuRequest.getName())){
-                menu.setMenuName(menuRequest.getName());
+            if(!StringUtils.isNullOrEmpty(menuRequest.getMenuName())){
+                menu.setMenuName(menuRequest.getMenuName());
             }
             if(!StringUtils.isNullOrEmpty(menuRequest.getAccess()+"")){
                 menu.setAccess(menuRequest.getAccess());
@@ -81,6 +82,16 @@ public class MenuServiceImpl implements MenuService {
     public RestResponse listMenu() {
         try {
             return RestResponse.success(menuMapper.listAll());
+        }catch (Exception e){
+            logger.error(e.getMessage());
+            return RestResponse.failure(ResultCode.SYSTEM_ERROR);
+        }
+    }
+
+    @Override
+    public RestResponse listMenuByUserName(String userName) {
+        try {
+            return RestResponse.success(menuMapper.listMenuByUserName(userName));
         }catch (Exception e){
             logger.error(e.getMessage());
             return RestResponse.failure(ResultCode.SYSTEM_ERROR);
