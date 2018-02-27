@@ -58,7 +58,12 @@ public class UserServiceImpl implements UserService{
             if(StringUtils.isNotBlank(userRequest.getUserName())){
                 user.setUserName(userRequest.getUserName());
             }
-            user.setRoleId(userRequest.getRoleId());
+            if(StringUtils.isNotBlank(userRequest.getPhoneNum())){
+                user.setPhoneNum(userRequest.getPhoneNum());
+            }
+            if(StringUtils.isNotBlank(userRequest.getRoleSerialNum())){
+                user.setRoleSerialNum(userRequest.getRoleSerialNum());
+            }
             userMapper.create(user);
             return RestResponse.success(null);
         } catch (Exception e) {
@@ -83,8 +88,8 @@ public class UserServiceImpl implements UserService{
             if(StringUtils.isNotBlank(userRequest.getUserName())){
                 user.setUserName(userRequest.getUserName());
             }
-            if(StringUtils.isNotBlank(userRequest.getRoleId()+"")){
-                user.setRoleId(userRequest.getRoleId());
+            if(StringUtils.isNotBlank(userRequest.getRoleSerialNum()+"")){
+                user.setRoleSerialNum(userRequest.getRoleSerialNum());
             }
             userMapper.update(user);
             return RestResponse.success(null);

@@ -10,15 +10,16 @@ public class User extends BaseBean {
     private String phoneNum;
     private String userName;
     private String userPassword;
-    private int roleId;
+    private String roleSerialNum;
+    private Role userRole;
     private int deleted =0;
 
-    public int getRoleId() {
-        return roleId;
+    public String getRoleSerialNum() {
+        return roleSerialNum;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleSerialNum(String roleSerialNum) {
+        this.roleSerialNum = roleSerialNum;
     }
 
     public String getRealName() {
@@ -77,8 +78,16 @@ public class User extends BaseBean {
         this.userPassword = userPassword;
     }
 
+    public Role getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(Role userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
-        return "User [id=" + uId + ", name=" + userName + ", roleId=" + roleId + "]";
+        return "User [id=" + uId + ", name=" + userName + ", roleSerialNum=" + roleSerialNum + "]";
     }
 }

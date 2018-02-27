@@ -8,8 +8,9 @@ public class UserRequest {
     private String userName;
     private String userPassword;
     private String roleDesc;
-    private int roleId;
+    private String roleSerialNum;
     private int deleted =0;
+
 
     public String getRealName() {
         return realName;
@@ -59,12 +60,12 @@ public class UserRequest {
         this.roleDesc = roleDesc;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public String getRoleSerialNum() {
+        return roleSerialNum;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleSerialNum(String roleSerialNum) {
+        this.roleSerialNum = roleSerialNum;
     }
 
     public int getDeleted() {

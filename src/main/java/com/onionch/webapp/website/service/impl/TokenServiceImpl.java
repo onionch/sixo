@@ -44,7 +44,6 @@ public class TokenServiceImpl implements TokenService {
                     token = new Token();
                     token.setToken(RandomStringUtils.randomAlphanumeric(32));
                     token.setuId(user.getuId());
-                    token.setRoleId(user.getRoleId());
                     tokenMapper.create(token);
                 }
                 tokenMapper.updateLastDate(token.getToken());

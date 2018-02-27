@@ -12,16 +12,41 @@
     <!--
         根据id查询得到一个user对象
      -->
-    <select id="all" resultType="com.onionch.webapp.website.bean.User">
-        SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id
+
+    <resultMap type="com.onionch.webapp.website.bean.User" id="userResultMap">
+        <id property="uId" column="uId"/>
+        <result property="realName" column="realName" />
+        <result property="userName" column="userName" />
+        <result property="mailAddr" column="mailAddr" />
+        <result property="phoneNum" column="phoneNum" />
+        <result property="userRole.roleDesc" column="roleDesc" />
+        <result property="userRole.roleName" column="roleName" />
+        <result property="userRole.access" column="access" />
+    </resultMap>
+
+    <select id="all" resultMap="userResultMap">
+        SELECT u.uId,u.realName,u.mailAddr,u.phoneNum,u.userName,r.roleDesc,r.access,r.access,
+        u.created_date,u.updated_date
+        FROM user u LEFT JOIN role r ON u.roleSerialNum=r.serialNum
         WHERE deleted=0 and 1=1
         <if test="userName != null">
             <if test="userName != '' ">
-                and userName like CONCAT('%',#{userName},'%')
+                and u.userName like CONCAT('%',#{userName},'%')
             </if>
         </if>
-        order by created_date desc limit #{pageIndex},#{pageSize};
+        order by u.created_date desc limit #{pageIndex},#{pageSize};
     </select>
+
+    <!--<select id="all" resultMap="userResultMap">-->
+        <!--SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id-->
+        <!--WHERE deleted=0 and 1=1-->
+        <!--<if test="userName != null">-->
+            <!--<if test="userName != '' ">-->
+                <!--and userName like CONCAT('%',#{userName},'%')-->
+            <!--</if>-->
+        <!--</if>-->
+        <!--order by created_date desc limit #{pageIndex},#{pageSize};-->
+    <!--</select>-->
 
     <select id="allCount" resultType="Integer">
         select count(1) from user where 1=1
@@ -34,7 +59,7 @@
 
     <select id="listAll"
             resultType="com.onionch.webapp.website.bean.User">
-        SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleId=role.id
+        SELECT user.*,role.roleDesc FROM user LEFT JOIN role ON user.roleSerialNum=role.serialNum
         WHERE deleted=0
     </select>
 
@@ -56,13 +81,13 @@
     <insert id="create" parameterType="com.onionch.webapp.website.bean.User"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user
-        (uId,userName,roleId,userPassword,realName,mailAddr,phoneNum,created_date,updated_date,deleted)
+        (uId,userName,roleSerialNum,userPassword,realName,mailAddr,phoneNum,created_date,updated_date,deleted)
         VALUES
-        (#{uId},#{userName},#{roleId},#{userPassword},#{realName},#{mailAddr},#{phoneNum},now(),now(),#{deleted})
+        (#{uId},#{userName},#{roleSerialNum},#{userPassword},#{realName},#{mailAddr},#{phoneNum},now(),now(),#{deleted})
     </insert>
 
     <update id="update" parameterType="com.onionch.webapp.website.bean.User">
-        UPDATE user set roleId=#{roleId},userName=#{userName},userPassword=#{userPassword},updated_date=now()
+        UPDATE user set roleSerialNum=#{roleSerialNum},userName=#{userName},userPassword=#{userPassword},updated_date=now()
         WHERE uId=#{uId}
     </update>
 
