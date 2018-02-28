@@ -1,21 +1,13 @@
 package com.onionch.webapp.website.controller;
 
-import com.onionch.webapp.website.bean.*;
 import com.onionch.webapp.website.bean.enums.ResultCode;
 import com.onionch.webapp.website.bean.request.LoginRequest;
 import com.onionch.webapp.website.bean.response.RestResponse;
-import com.onionch.webapp.website.service.RoleService;
 import com.onionch.webapp.website.service.TokenService;
-import com.onionch.webapp.website.service.UserService;
-import com.onionch.webapp.website.util.DESUtil;
-import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/*")

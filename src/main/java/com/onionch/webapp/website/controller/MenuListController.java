@@ -1,8 +1,6 @@
 package com.onionch.webapp.website.controller;
 
 import com.onionch.webapp.website.bean.enums.ResultCode;
-import com.onionch.webapp.website.bean.request.MenuListRequest;
-import com.onionch.webapp.website.bean.request.MenuRequest;
 import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.service.MenuService;
 import org.apache.log4j.Logger;
