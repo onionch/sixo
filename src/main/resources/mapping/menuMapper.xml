@@ -39,8 +39,8 @@
     </select>
 
     <select id="listMenuByUserName" resultType="com.onionch.webapp.website.bean.Menu">
-        SELECT m.url FROM user u LEFT JOIN role r ON u.roleSerialNum=r.serialNum RIGHT JOIN menu m ON r.access=m.access
-        WHERE u.userName=#{userName};
+        SELECT url FROM menu WHERE access &lt;=
+        (SELECT r.access FROM user u LEFT JOIN role r ON u.roleSerialNum=r.serialNum WHERE u.userName=#{userName});
     </select>
 
 </mapper>
