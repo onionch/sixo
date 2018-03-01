@@ -47,3 +47,17 @@ CREATE TABLE `token` (
   UNIQUE KEY `token_uId_uindex` (`uId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
+CREATE TABLE `user` (
+  `uId` varchar(50) NOT NULL,
+  `userName` varchar(50) DEFAULT NULL,
+  `roleSerialNum` varchar(50) DEFAULT NULL,
+  `userPassword` varchar(50) DEFAULT NULL,
+  `realName` varchar(50) DEFAULT NULL,
+  `phoneNum` varchar(50) DEFAULT NULL,
+  `mailAddr` varchar(50) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `updated_date` datetime DEFAULT NULL,
+  `deleted` int(11) DEFAULT '0',
+  PRIMARY KEY (`uId`),
+  UNIQUE KEY `user_uId_uindex` (`uId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
