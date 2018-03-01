@@ -9,7 +9,7 @@ CREATE TABLE `menu` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `menu_id_uindex` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `resource` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -20,7 +20,7 @@ CREATE TABLE `resource` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `resource_id_uindex` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -32,7 +32,7 @@ CREATE TABLE `role` (
   `updated_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `role_id_uindex` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `token` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -45,5 +45,5 @@ CREATE TABLE `token` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_id_uindex` (`id`),
   UNIQUE KEY `token_uId_uindex` (`uId`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 

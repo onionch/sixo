@@ -1,4 +1,5 @@
 package com.onionch.webapp.website.controller;
+
 import com.onionch.webapp.website.bean.response.RestResponse;
 import com.onionch.webapp.website.bean.enums.ResultCode;
 import com.onionch.webapp.website.bean.request.MenuRequest;
@@ -26,6 +27,7 @@ public class MenuController {
     @RequestMapping(value = "/menus", method = RequestMethod.POST)
     private @ResponseBody
     RestResponse create(@RequestBody MenuRequest menuRequest) {
+
         if (StringUtils.isEmpty(menuRequest.getMenuName())) {
             return RestResponse.failure(ResultCode.PARAM_IS_BLANK, "menu name is empty");
         }
